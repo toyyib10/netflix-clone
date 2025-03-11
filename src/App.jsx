@@ -1,4 +1,5 @@
 import "../src/App.css"
+import {links} from "./constant"
 
 const App = () => {
   return (
@@ -37,17 +38,13 @@ const App = () => {
         </div>
         <div className="w-full bg-black text-white lg:-mt-3 -mt-3 px-6 md:px-12 lg:px-20 xl:px-30 2xl:px-45 pb-10">
           <h1 className="font-bold text-2xl xl:text-3xl pb-6">Trending Now</h1>
-          <div className="flex space-x-6 pl-4">
-            <div className="bg-white h-65 w-45"></div>
-            <div className="bg-white h-65 w-45"></div>
-            <div className="bg-white h-65 w-45"></div>
-            <div className="bg-white h-65 w-45"></div>
-            <div className="bg-white h-65 w-45"></div>
-            <div className="bg-white h-65 w-45"></div>
-            <div className="bg-white h-65 w-45"></div>
-            <div className="bg-white h-65 w-45"></div>
-            <div className="bg-white h-65 w-45"></div>
-            <div className="bg-white h-65 w-45"></div>
+          <div className="flex space-x-6 pl-4 overflow-x-auto pb-5">
+            {links.map((link, index) => (
+              <div className = {`2xl:h-80 2xl:w-60 h-43 w-30 shrink-0 xl:w-56 xl:h-68 rounded-xl lg:w-42 lg:h-52 md:w-36 md:h-48 relative first:ml-10 bg-[url(${link})] bg-cover bg-center bg-no-repeat`}>
+
+                <h1 className="absolute z-10 londrina-outline top-15 -left-4 text-white font-bold text-[75px] sm:text-[80px] sm:top-18 md:-left-4 lg:text-[105px] lg:top-16 lg:-left-5 xl:text-[110px] xl:top-30 xl:-left-4 2xl:top-38 2xl:-left-5 2xl:text-[120px]">{index + 1}</h1>
+              </div>
+            ))}
           </div>
         </div>
     </div>

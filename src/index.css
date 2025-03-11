@@ -1,1 +1,8 @@
 @import "tailwindcss";
+
+@layer base {
+    .londrina-outline {
+      font-family: "Londrina Outline", sans-serif;
+    }
+  }
+  
