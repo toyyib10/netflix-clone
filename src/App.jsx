@@ -1,7 +1,43 @@
 import "../src/App.css"
 import {links} from "./constant"
+import { useRef, useState, useEffect } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react"; 
+
 
 const App = () => {
+  const scrollRef = useRef(null);
+  const [showLeft, setShowLeft] = useState(false);
+  const [showRight, setShowRight] = useState(true);
+
+  useEffect(() => {
+    const checkScrollPosition = () => {
+      if (scrollRef.current) {
+        const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
+
+        setShowLeft(scrollLeft > 0);
+        setShowRight(Math.round(scrollLeft + clientWidth) < Math.round(scrollWidth));
+      }
+    };
+
+    const container = scrollRef.current;
+    container?.addEventListener("scroll", checkScrollPosition);
+    return () => container?.removeEventListener("scroll", checkScrollPosition);
+  }, []);
+
+
+
+  const scroll = (direction) => {
+    if (scrollRef.current) {
+      const container = scrollRef.current;
+      const scrollAmount = container.clientWidth;
+
+      container.scrollBy({
+        left: direction === "left" ? -scrollAmount : scrollAmount,
+        behavior: "smooth",
+      });
+    }
+  };
+
   return (
     <div>
         <div className='bg-[url(https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/f562aaf4-5dbb-4603-a32b-6ef6c2230136/dh0w8qv-9d8ee6b2-b41a-4681-ab9b-8a227560dc75.jpg/v1/fill/w_1280,h_720,q_75,strp/the_netflix_login_background__canada__2024___by_logofeveryt_dh0w8qv-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9NzIwIiwicGF0aCI6IlwvZlwvZjU2MmFhZjQtNWRiYi00NjAzLWEzMmItNmVmNmMyMjMwMTM2XC9kaDB3OHF2LTlkOGVlNmIyLWI0MWEtNDY4MS1hYjliLThhMjI3NTYwZGM3NS5qcGciLCJ3aWR0aCI6Ijw9MTI4MCJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.LOYKSxIDqfPwWHR0SSJ-ugGQ6bECF0yO6Cmc0F26CQs)] bg-center w-full  h-full text-white'>
@@ -36,15 +72,21 @@ const App = () => {
           <div className="h-[95%] w-full" style={{background:"radial-gradient(50% 500% at 50% -420%, rgba(64, 97, 231, 0.4) 80%, rgba(0, 0, 0, 0.1) 100%), black", borderTopLeftRadius:"32%", borderTopRightRadius:"32%"}}>
           </div>
         </div>
-        <div className="w-full bg-black text-white lg:-mt-3 -mt-3 px-6 md:px-12 lg:px-20 xl:px-30 2xl:px-45 pb-10">
+        <div className="w-full relative bg-black text-white lg:-mt-3 -mt-3 px-9 md:px-12 lg:px-20 xl:px-30 2xl:px-45 pb-10">
           <h1 className="font-bold text-2xl xl:text-3xl pb-6">Trending Now</h1>
-          <div className="flex space-x-6 pl-4 overflow-x-auto pb-5">
+          <div ref={scrollRef} className="flex gap-6 lg:gap-9 2xl:gap-11 pl-4 overflow-x-auto py-5 [::-webkit-scrollbar]:hidden [scrollbar-width:none]">
+            <button onClick={() => scroll("left")} className={`absolute xl:left-18 lg:left-9 2xl:left-30 left-2 top-1/2 -translate-y-1/2 bg-gray-300/15 h-1/3 rounded-full text-white z-10 transition-opacity duration-300 ${showLeft ? "opacity-100" : "opacity-0 pointer-events-none"}`}>
+              <ChevronLeft className="size-5.5 lg:size-8 xl:size-9 2xl:10" />
+            </button>
             {links.map((link, index) => (
-              <div className = {`2xl:h-80 2xl:w-60 h-43 w-30 shrink-0 xl:w-56 xl:h-68 rounded-xl lg:w-42 lg:h-52 md:w-36 md:h-48 relative first:ml-10 bg-[url(${link})] bg-cover bg-center bg-no-repeat`}>
+              <div className = {`${link} 2xl:h-80 2xl:w-60 h-43 w-30 shrink-0 xl:w-56 xl:h-68 rounded-xl lg:w-42 lg:h-52 md:w-36 md:h-48 relative first:ml-10 bg-cover bg-center bg-no-repeat hover:scale-110 transition duration-300 mb-5 cursor-pointer`}>
 
                 <h1 className="absolute z-10 londrina-outline top-15 -left-4 text-white font-bold text-[75px] sm:text-[80px] sm:top-18 md:-left-4 lg:text-[105px] lg:top-16 lg:-left-5 xl:text-[110px] xl:top-30 xl:-left-4 2xl:top-38 2xl:-left-5 2xl:text-[120px]">{index + 1}</h1>
               </div>
             ))}
+            <button onClick={() => scroll("right")} className={`absolute sm:right-1 right-2 xl:right-19 lg:right-10 2xl:right-30 top-1/2 -translate-y-1/2 bg-gray-300/15 h-1/3 rounded-full text-white z-10 transition-opacity duration-300 ${showRight ? "opacity-100" : "opacity-0 pointer-events-none"}`}>
+              <ChevronRight className="size-6.5 lg:size-7.5 xl:size-8.5 2xl:10.5" />
+            </button>
           </div>
         </div>
     </div>
