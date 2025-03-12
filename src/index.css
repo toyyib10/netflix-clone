@@ -4,5 +4,19 @@
     .londrina-outline {
       font-family: "Londrina Outline", sans-serif;
     }
-  }
-  
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+::-webkit-scrollbar-track {
+  background: #1e1e1e;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #e7000b;
+  border-radius: 10px;
+}
