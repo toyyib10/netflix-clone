@@ -4,6 +4,7 @@ import { useRef, useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react"; 
 import Reasons from "./components/Reasons";
 import Faq from "./components/Faq";
+import Rtw from "./components/Rtw";
 
 
 const App = () => {
@@ -92,6 +93,7 @@ const App = () => {
         </div>
         <Reasons />
         <Faq />
+        <Rtw/>
     </div>
     
   )
