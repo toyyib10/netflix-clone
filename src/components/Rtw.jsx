@@ -9,7 +9,7 @@ const Rtw = () => {
         <div className='flex flex-col justify-center items-start px-11 xl:items-center space-y-5 md:flex-row md:space-y-0 md:mt-5 md:space-x-3'>
             <form action="" className='flex flex-col justify-center mt-5 md:mt-0 relative'>
                 <label className='text-sm left-2 md:left-5 md:text-lg md:top-1.5 top-1 absolute'>Email address</label>
-                <input className='sm:w-xl w-lg md:w-[34rem] xl:w-140 xl:pl-6 xl:h-18 md:pl-4 h-14md:pt-11 md:pb-5 md:text-lg pl-2 pt-6 pb-1 border border-[#ffffff59] bg-[#81abff2c] rounded' type="text" />
+                <input className='sm:w-xl w-lg md:w-[31rem] xl:w-140 xl:pl-6 xl:h-18 md:pl-4 h-14md:pt-11 md:pb-5 md:text-lg pl-2 pt-6 pb-1 border border-[#ffffff59] bg-[#81abff2c] rounded' type="text" />
             </form>
             <button className='bg-red-600 rounded cursor-pointer px-3 flex space-x-2 py-3 md:py-5.5 xl:py-5 2xl:py-4 2xl:space-x-4 2xl:px-8'>
                 <span className='font-bold text-xl text-nowrap 2xl:text-3xl xl:text-2xl '>Get Started</span>
